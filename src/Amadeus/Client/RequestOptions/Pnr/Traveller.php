@@ -94,4 +94,11 @@ class Traveller extends LoadParamsFromArray
      * @var Traveller
      */
     public $infant;
+
+    /**
+     * Title (MR, MRS, MISS)
+     *
+     * @var string
+     */
+    public $title;
 }
