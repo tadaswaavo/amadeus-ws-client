@@ -5,7 +5,6 @@
   "keywords": ["amadeus", "gds", "service", "webservice", "soap", "wsdl", "client", "xml", "travel", "airline", "hotel", "booking", "car", "rental", "offer", "masterpricer"],
   "minimum-stability": "stable",
   "homepage": "https://github.com/amabnl/amadeus-ws-client",
-  "canonical": false,
   "license": "Apache-2.0",
   "authors": [
     {
