@@ -6,6 +6,7 @@
   "minimum-stability": "stable",
   "homepage": "https://github.com/amabnl/amadeus-ws-client",
   "license": "Apache-2.0",
+  "canonical": false,
   "authors": [
     {
       "name": "Dieter Devlieghere",
