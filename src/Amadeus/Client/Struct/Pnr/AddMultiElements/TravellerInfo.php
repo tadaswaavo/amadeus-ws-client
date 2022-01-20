@@ -29,7 +29,7 @@ use Amadeus\Client\RequestOptions\Pnr\TravellerGroup as TravellerGroupOptions;
  * TravellerInfo
  *
  * @package Amadeus\Client\Struct\Pnr\AddMultiElements
- * @author Dieter Devlieghere <dermikagh@gmail.com>
+ * @author  Dieter Devlieghere <dermikagh@gmail.com>
  */
 class TravellerInfo
 {
@@ -52,7 +52,7 @@ class TravellerInfo
     /**
      * TravellerInfo constructor.
      *
-     * @param TravellerOptions|null $traveller
+     * @param TravellerOptions|null      $traveller
      * @param TravellerGroupOptions|null $travellerGroup
      */
     public function __construct($traveller = null, $travellerGroup = null)
@@ -112,6 +112,16 @@ class TravellerInfo
             $this->passengerData[0]->dateOfBirth = new DateOfBirth(
                 $this->formatDateOfBirth($traveller->dateOfBirth)
             );
+        }
+
+        if ($traveller->title) {
+            $this->enhancedPassengerData = [
+                'enhancedTravellerInformation' => [
+                    'otherPaxNamesDetails' => [
+                        'title' => $traveller->title,
+                    ],
+                ],
+            ];
         }
     }
 
