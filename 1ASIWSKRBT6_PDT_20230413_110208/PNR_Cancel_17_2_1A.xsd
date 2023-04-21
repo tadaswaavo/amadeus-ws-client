@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.amadeus.com/PNRXCL_17_2_1A" xmlns="http://xml.amadeus.com/PNRXCL_17_2_1A" elementFormDefault="qualified">
+  <xs:element name="PNR_Cancel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="reservationInfo" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="reservation">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="controlNumber">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation xml:lang="en">Format limitations: an..20</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1" />
+                          <xs:maxLength value="20" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="pnrActions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="optionCode" maxOccurs="40">
+                <xs:simpleType>
+                  <xs:annotation>
+                    <xs:documentation xml:lang="en">Format limitations: n..3</xs:documentation>
+                  </xs:annotation>
+                  <xs:restriction base="xs:decimal" />
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="cancelElements" minOccurs="0" maxOccurs="4">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="entryType">
+                <xs:simpleType>
+                  <xs:annotation>
+                    <xs:documentation xml:lang="en">Format limitations: an1</xs:documentation>
+                  </xs:annotation>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1" />
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="element" minOccurs="0" maxOccurs="999">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="identifier" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation xml:lang="en">Format limitations: an..3</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1" />
+                          <xs:maxLength value="3" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="number" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation xml:lang="en">Format limitations: an..5</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1" />
+                          <xs:maxLength value="5" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="subElement" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation xml:lang="en">Format limitations: n..5</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:decimal" />
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+<!-- SchemaRules="2009/09"-->
+<!--Created with SchemaBuilder 5.1.0 by Amadeus S.A.S.-->
+<!--Build Key:
+1F8B08000000000000009593C16EDB300C86EF7A8ADC7618123BDDBA220174F0E2243B346990A6C00E010CD66612A1B2E48972D1A0E8BB8F921DAC3D6DBB042443FF243F52CBF97ABECD76F3BCB85BCBAB747C331C8F87E9B7C1CA9A0ACE837432BD9E4CBFA483E56AF7394DA7692AB255E6CF0DD242693450A3148F40B8668B1A28519EBC6FA649F252EB11D450614BA3D2D689786C4DA531574E2684DE2B73A4A4522589F284E5D33DFFD620BD6B5194B6424E2169AC095E5DA361EF009AA2DB8039877AD2B45A73A0393B753CF9CEADF000ADF64BD7ECB8CBAA53AC6CFBA8F11E7FB5684ADC802F4FBD1C9AEFFFD43D9A3F39AF61FEB7E2F5191D296BD872A89165D882235738BF8903D3D9B69A7BB40154F423ADF871B0FE22A06D09BA1F51DB63C5DCF2E9FEC73CCBF758A90394DE5BAB693FDF15B9220FC6CF980C036354FB15B8270C88773187225CDADFDA236B99636C2482A9D11DB14711ED85425DD1BD759ED95DE244DC554601E8C7588E1E94EE1765FE0B506395F16BF4DD326233CE5AFF8E4FF4C3BD8C443740E0497CA4E92449277D8C16D6655AB136752284EE599548B92A3DD70677EE18520DCE07DD07A34AE5CFFD20DE81210D2195E948264D49AFBCCB56C96B855AF118C0E7F336E27F4568AFEAAFB593E05B997DBC518E445611CB0B697FD7FAA6F50BAB2B74320484180E571DC34F3450E6605D1D9B180E4547488E33F1AEB8CC3659B1596F8BF1CD35F03DD7A08CDCACC7025F1A5E560154E4F3A5DC6D1FE697E50CC021C8F1D78BCFE9DB9FB35BD1F05B5074BABC8D7E35F28AAD6715F6C566C4029160F8AC9801BF1B2D2EBB911BE3FA50BFE350E737FDEDB30D4C040000
+-->
+

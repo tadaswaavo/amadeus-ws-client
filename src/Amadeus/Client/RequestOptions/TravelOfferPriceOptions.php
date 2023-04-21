@@ -7,13 +7,5 @@ use Amadeus\Client\RequestOptions\Travel\PricedOffer;
 
 class TravelOfferPriceOptions extends Base
 {
-    /**
-     * @var DataLists
-     */
-    public $dataLists;
 
-    /**
-     * @var PricedOffer
-     */
-    public $pricedOffer;
 }

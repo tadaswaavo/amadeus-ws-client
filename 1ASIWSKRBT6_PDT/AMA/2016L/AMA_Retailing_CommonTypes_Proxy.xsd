@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://xml.amadeus.com/2010/06/Retailing_Types_v2" targetNamespace="http://xml.amadeus.com/2010/06/Retailing_Types_v2" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.000" id="AMA2016L">
+  <xs:include schemaLocation="chameleon/AMA_Retailing_CommonTypes.xsd" />
+</xs:schema>
+

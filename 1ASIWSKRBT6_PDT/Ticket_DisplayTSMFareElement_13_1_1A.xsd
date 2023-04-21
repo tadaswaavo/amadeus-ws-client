@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.amadeus.com/TFRERQ_13_1_1A" xmlns="http://xml.amadeus.com/TFRERQ_13_1_1A" elementFormDefault="qualified">
+  <xs:element name="Ticket_DisplayTSMFareElement">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Get a fare element of a TSM</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="fareElementTattoo" maxOccurs="10" type="ElementManagementSegmentType">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">-Type of the fare element. -Tattoo of the fare element.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ElementManagementSegmentType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">To specify the PNR segments/elements references and action to apply</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="reference" type="ReferencingDetailsType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Contains the type of the Fare element and the tatoo of the associated TSM.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReferencingDetailsType">
+    <xs:sequence>
+      <xs:element name="qualifier" type="AlphaNumericString_Length1To10">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Type of the fare element.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="number" type="NumericInteger_Length1To35">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Tattoo of the associated TSM.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AlphaNumericString_Length1To10">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: an..10</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NumericInteger_Length1To35">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: n..35</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:pattern value="-?[0-9]{1,35}" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+<!-- SchemaRules="2010/01"-->
+<!--Created with SchemaBuilder 5.0.0 by Amadeus S.A.S.-->
+<!--"Amadeus Proprietary and Confidential Information: unauthorized use and disclosure strictly forbidden. 2010 - Amadeus s.a.s - All Rights Reserved."-->
+<!--Build Key:
+1F8B08000000000000009594C16EDB381086EF7C0AA2973D2C2CC9718BA2067850633958749DA48E8A5E0A080C39B68952A49643A55183BC7B879292A697EEEEC5180EA919CEF7FFF4457559EDCBBADA345797E2AC58AE16C59BC5D93BFE19B403D472E0C5DBF5EBB7EB55C12F76F59F45B12E0A56EECA3874805B63C1C91604259AF7128DAA533ABB47CD6E25C225ED61271588538CDD3ACFEF5B9BC9566AE83153BECDD96DEFB4858D09224788D1B823E6DA2864EA04EAEB0DFDB652C4D003535E031D41E1BC4BABB60547AB79AFEDA41B523BE17A6B29D10DC11C4F51BC2AA776FC3AF82E1888320C5C3ACDCFBD3B184D358CB4FC2F77F0A195D178B7E6BD937D3CF960BE83E63DC2785C1B54D6631F80630C46453B70FAE6D668AA91712257F0057F6A8699CC30ADADE5FB740FE47BBA7DB8039DBD621A0EB2B7F1227409971607691198F6FDAD851BF8A707A7E05A46759A77C0BDFF4F30C1FD3CF390047A6C1EEE20204D4551000B54862279A40EC3233B907CFBDE12339F941CD7A39CE3C729FA9702D62B6967E4D61F75923140EB23E4EDB79C863507A962A3E12EAFA6B8F6DE625ED5CDC660942E9E9372A4272999EF64F80AC901D3191CB5C72F7FFB23D576C7F162465F393BB016C211663863BC356035DEF8109F711208A47B969818FF9ADB900B8C9D9DE4FE17B2CE1B172F214EF28CE60BDEC717C4C6753274C6A61112614C4FABC88BE59CC3AD0FA535547B7670F28651801B7216F526934E54B19521A6BA9F9C51260EF32031488776F42BF111C4FE19585DEEF2070DD6D018920CF598D12E4BD7D32F9F1399E7FCE90D4D352933A21A5FB6718ADDA38D577DECFAB8F556431029C1D862B19B30FE81DCFC7C378B059B208965C95EF417E575D9D44691B6CD72B5229BB7D238517FA819DC77A45823B1D95417A2DE7FAA9E14E23280144BFAAB9913A2DEEEABFD47D6D11B3178229527F693406249D19D49AA89B3098E1C398AB931B9ADB372A86F765BAA5C594883B327CD7E7F6AB68358AED80F93969FD72D050000
+-->
+
