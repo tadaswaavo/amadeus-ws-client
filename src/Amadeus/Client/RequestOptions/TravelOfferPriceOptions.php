@@ -2,10 +2,9 @@
 
 namespace Amadeus\Client\RequestOptions;
 
-use Amadeus\Client\RequestOptions\Travel\DataLists;
-use Amadeus\Client\RequestOptions\Travel\PricedOffer;
-
 class TravelOfferPriceOptions extends Base
 {
-
+    public string $offerItemID = '';
+    public string $ownerCode = '';
+    public string $shoppingResponseRefID = '';
 }
