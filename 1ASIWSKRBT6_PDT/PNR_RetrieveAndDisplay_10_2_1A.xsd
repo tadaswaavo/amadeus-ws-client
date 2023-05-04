@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.amadeus.com/PADSRQ_10_2_1A" xmlns="http://xml.amadeus.com/PADSRQ_10_2_1A" elementFormDefault="qualified">
+  <xs:element name="PNR_RetrieveAndDisplay">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="reservationInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="reservation">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="controlNumber">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation xml:lang="en">Format limitations: an..20</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1" />
+                          <xs:maxLength value="20" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="personalFacts" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="paxDetails">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="surname">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation xml:lang="en">Format limitations: an..70</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1" />
+                                <xs:maxLength value="70" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ticket" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ticketNumber">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="documentDetails">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="number">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation xml:lang="en">Format limitations: n10</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="10" />
+                                      <xs:maxLength value="10" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ticketProvider">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="companyIdentification">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="otherCompany">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation xml:lang="en">Format limitations: n3</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="3" />
+                                      <xs:maxLength value="3" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dynamicOutputOption">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="statusDetails">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="action" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation xml:lang="en">Format limitations: an..3</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1" />
+                          <xs:maxLength value="3" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+<!-- SchemaRules="2009/06"-->
+<!--Created with SchemaBuilder 4.2 by Amadeus S.A.S.-->
+<!--Build Key:
+1F8B08000000000000009592C16EDB300C86EF7A8ADC761892D8ED56AC0174F09AA497254D13EF1620602DC6112A4B9E2807358ABEFB28DBC1DAD3B68B4152F2CF5F1F79BF582FB659BE981F1ED6F22A4993717A354EBF8CF20649413B4ABECDAEAF67E9CDE87E957F4E925992886C9585B6465A6A83162A9477AEAA9CCD636DF2424A3C01E19A0FA88602E529847A369DBE54660215286C6852B86A2A8A1316CF3BFE5620836F50144E216120699D8D5955A1E5EC0886BAB406DB4659691B63B850B75E97A7D0A70A8FD09870EFEBE843F58ACA354F0677F8AB415BE0064271EA0FD07EFF278F68FFDC798D8F7E3BBC9ED1937696238F0659862328B941FB268E8C64DB18B6E8229D2EEF10753FC7E82F02C6156086171A572AEDE57CB65F287D8422E4CE19DA2FF2C35C53001B987BCDA818D27E05FE1983B6657F873AACB4FFE14A96B165E7A17B7985BEC48169172F351A453BE70353BBD489D8504611E5C7DA1C0368338CC8FE179BDA691BD618FA31F4AADEB9F08E8DE87D4782C4CB98DC4E939BA1464BE733A35992FA8710FAB32E90E6BA08DC127CDB53A30A7C886A3FAD2E7468874EC1832503F12A4391CC96A683729EADA6AF0A8D66F7C0FBF236E153114DA9613D7B09DE8EBB8F4BC9950E1105CFE8C50B99F0D084BA094B67147A190B428CC7AB1EDE271A697B74BEEA6C8CC7A24723D34CBC6B2FB34D76D8ACB78734B979E215AE405BB95DE497118CC023C8F4EB25979B6CBEDB3E8A9A775DD3E9B2FBC30064CAD159C7A970D851800E988C2DB6C8CEF18C9955BC53B581565C862137D6677CF38CC3C9E5EE6383BE15C3A4659A88DF616EB8DD43040000
+-->
+

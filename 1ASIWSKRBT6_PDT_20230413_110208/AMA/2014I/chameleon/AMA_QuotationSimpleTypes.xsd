@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 sp1 (x64) (http://www.altova.com) by AMADEUS s.a.s. (AMADEUS s.a.s.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:iata="http://www.iata.org/IATA/2007/00/IATA2010.1" xmlns:qt="http://xml.amadeus.com/2010/06/QuotationTypes_v1" elementFormDefault="qualified" version="1.001" id="AMA2014I">
+  <xs:import namespace="http://www.iata.org/IATA/2007/00/IATA2010.1" schemaLocation="../../../IATA/2010.1/IATA_Proxy.xsd" />
+  <!--***********************************
+
+	Declaration of basic types we use
+
+	***********************************-->
+  <!--********Simple Type****-->
+  <!-- String Redefinitions-->
+  <xs:simpleType name="StringLength1to3">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Used for Character Strings, length 1 to 3.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StringLength1to6">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Used for Character Strings, length 1 to 6.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="6" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StringLength1to32">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Used for Character Strings, length 1 to 32.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="32" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StringLength1to16">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Used for Character Strings, length 1 to 16.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="16" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StringLength1to15">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Used for Character Strings, length 1 to 15.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="15" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StringLength1to13">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Used for Character Strings, length 1 to 13.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="13" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StringLength1to256">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Used for Character Strings, length 1 to 13.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="256" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IntegerLength1to13">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Used for Positive Integer of 13 digits length.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{13}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!--*********************************PriceComponents*********************************-->
+  <!-- Price Type declaration. A Price includes 4 attributes: Amount (float), Currency (3 alphas), DecimalPlaces (non-negative integer) and Type (free text).-->
+  <xs:attributeGroup name="PriceAttributeGroup">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Price Group is the definition of a fare with some
+
+				special properties. It contains: - A Type (string), mandatory - An Amount (decimal),
+
+				optional - A Currency Code (3 alphas), optional - A Decimal Place (positive
+
+				integer), optional</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="AmountCurrencyAndDecimalPlaceGroup" />
+    <xs:attribute name="MiscValue">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">This group is used when price component is returned without an amount, but with an additional data, e.g. exempted</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EXEMPTED" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Type" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Defines the price, e.g. for base fare, total...</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="FareAttributeGroup">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Fare Type is the definition of a fare with some special
+
+				properties. It contains: - A Type (string), mandatory - An Amount (decimal),
+
+				optional - A Currency Code (3 alphas), optional - A Decimal Place (positive
+
+				integer), optional - A Flexibility (FareFlexibilityType_type), optional</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="PriceAttributeGroup" />
+    <xs:attribute name="Flexibility" type="xs:integer" use="optional" />
+  </xs:attributeGroup>
+  <!--<xs:attributeGroup name="PointAttributeGroup">
+
+		<xs:annotation>
+
+			<xs:documentation xml:lang="en">A Point is an (amount) integer with a "Type"
+
+				attribute.</xs:documentation>
+
+		</xs:annotation>
+
+		<xs:attribute name="Type" type="xs:string"/>
+
+	</xs:attributeGroup>-->
+  <xs:attributeGroup name="TaxAttributeGroup">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A Tax is a common Price coupled to several indicators :
+
+				- IsTaxExempted (boolean), optional - Nature Code (string), optional - Tax Indicator
+
+				(string), optional - IsoCode (string), optional - Tax Rate (decimal), optional.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="PriceAttributeGroup" />
+    <xs:attribute name="IsExempted" type="xs:boolean" use="optional">
+      <xs:annotation>
+        <xs:documentation>Attribute set to Y if tax is exempted</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="NatureCode" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Nature Code</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Indicator" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Used to specify if the tax is: - X new - O Old - Q
+
+							Refundable - G - U</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsoCode" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Iso Country Code</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Rate" type="xs:decimal" use="optional">
+      <xs:annotation>
+        <xs:documentation>Rate</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--*********************************OtherComplexTypes*********************************-->
+  <!-- TypedLocationType -->
+  <xs:attributeGroup name="TypedLocationGroup">
+    <xs:annotation>
+      <xs:documentation>Type of location time:
+
+From
+
+To
+
+Connexion</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="CodeAndContextGroup" />
+    <xs:attribute name="Type" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="From" />
+          <xs:enumeration value="To" />
+          <xs:enumeration value="Connexion" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--	 DateTimeAndLocationType
+
+	<xs:complexType name="DateTimeAndLocationType">
+
+		<xs:all>
+
+			<xs:element name="Location">
+
+				<xs:annotation>
+
+					<xs:documentation>Location information</xs:documentation>
+
+				</xs:annotation>
+
+				<xs:complexType>
+
+					<xs:annotation>
+
+						<xs:documentation xml:lang="en">Location has a code and a
+
+							CodeContext</xs:documentation>
+
+					</xs:annotation>
+
+					<xs:attributeGroup ref="CodeAndContextGroup"/>
+
+				</xs:complexType>
+
+			</xs:element>
+
+		</xs:all>
+
+		<xs:attribute name="DateTime" type="xs:dateTime" use="required">
+
+			<xs:annotation>
+
+				<xs:documentation xml:lang="en">Date and time for this point</xs:documentation>
+
+			</xs:annotation>
+
+		</xs:attribute>
+
+	</xs:complexType>-->
+  <!--*************************************-->
+  <xs:complexType name="DisruptionFlightsType">
+    <xs:sequence>
+      <xs:element name="Order" type="xs:positiveInteger" minOccurs="0" />
+      <xs:element name="TicketNumber" type="IntegerLength1to13" minOccurs="0" />
+      <xs:element name="CouponNumber" type="xs:positiveInteger" minOccurs="0" />
+      <xs:element name="DisruptionTag" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Tag to indicate that the coupon has been identified as disrupted by ATU process</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!--******************************************************************
+
+	 AttributeGroups
+
+	******************************************************************-->
+  <xs:attributeGroup name="CodeAndContextGroup">
+    <xs:attribute name="Code" type="iata:AlphaNumericStringLength1to4" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Provider code in given code context (f.e. Airline
+
+					IATA code)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Context" type="iata:AlphaNumericStringLength1to4" use="optional" default="IATA">
+      <xs:annotation>
+        <xs:documentation>Code context for given's code (f.e. IATA, OTA,
+
+					etc...)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--******************************************************************
+
+	 Types related to functionnal package
+
+	******************************************************************-->
+  <!--*************************************************************************
+
+	<xs:group name="ProductGroup">
+
+		<xs:sequence>
+
+			<xs:element name="Provider" minOccurs="0">
+
+				<xs:annotation>
+
+					<xs:documentation> Full provider's name (free text). It provides also 2
+
+						attributes used to specify the provider code in a given context (f.e. Air
+
+						France => AF in IATA standard). </xs:documentation>
+
+				</xs:annotation>
+
+				<xs:complexType>
+
+					<xs:simpleContent>
+
+						<xs:extension base="xs:string">
+
+							<xs:attributeGroup ref="CodeAndContextGroup"/>
+
+						</xs:extension>
+
+					</xs:simpleContent>
+
+				</xs:complexType>
+
+			</xs:element>
+
+			<xs:group ref="ValidityContextGroup"/>
+
+					<xs:element name="From" type="DateTimeAndLocationType" minOccurs="0">
+
+				<xs:annotation>
+
+					<xs:documentation> Information</xs:documentation>
+
+				</xs:annotation>
+
+			</xs:element>
+
+			<xs:element name="To" type="DateTimeAndLocationType" minOccurs="0">
+
+				<xs:annotation>
+
+					<xs:documentation>End Information</xs:documentation>
+
+				</xs:annotation>
+
+			</xs:element>
+
+		</xs:sequence>
+
+	</xs:group>-->
+  <xs:group name="ProductGroup">
+    <xs:sequence>
+      <xs:element name="Provider" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Full provider's name (free text). It provides also 2
+
+						attributes used to specify the provider code in a given context (f.e. Air
+
+						France =&gt; AF in IATA standard).</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attributeGroup ref="CodeAndContextGroup" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Start" type="DateTimeAndLocationType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Start Information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="End" type="DateTimeAndLocationType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>End Information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <!--******************************************************************-->
+  <xs:attributeGroup name="ItineraryProductAttributeGroup">
+    <xs:attribute name="Type" use="optional">
+      <xs:annotation>
+        <xs:documentation>Type of Product:
+
+											AIR</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Air" />
+          <xs:enumeration value="Arunk" />
+          <xs:enumeration value="GrandTransport" />
+          <xs:enumeration value="NewGrandTransport" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Subtype" use="optional">
+      <xs:annotation>
+        <xs:documentation>Subtype of Product:
+
+											Flown</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Open" />
+          <xs:enumeration value="Flown" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Identifier" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Flight Number</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ClassOfService" type="StringLength1to3" use="optional">
+      <xs:annotation>
+        <xs:documentation>Class of Service</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--******************************************************-->
+  <xs:attributeGroup name="TypedContextAttributeGroup">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">This is a generic context. Is contains only one
+
+				mandatory "Type" attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="State" use="optional">
+      <xs:annotation>
+        <xs:documentation>Define the status: 		Current
+
+Original
+
+Disrupted</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Original" />
+          <xs:enumeration value="Current" />
+          <xs:enumeration value="Disrupted" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:group name="PriceComponentGroup">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Pure Prices data should be added here. It extends
+
+				generic context and so have a mandatory "Type" attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Price" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Represent generic monetary
+
+								information.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attributeGroup ref="PriceAttributeGroup" />
+        </xs:complexType>
+      </xs:element>
+      <!--                    <xs:element name="Fare"     type="FareType"    minOccurs="0" maxOccurs="unbounded"/>-->
+      <xs:element name="Tax" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Represent tax information</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attributeGroup ref="TaxAttributeGroup" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Point" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Define points and miles information</xs:documentation>
+        </xs:annotation>
+        <!-- New data for SWA: points "amounts"  -->
+        <!-- <xs:complexType>
+
+						<xs:sequence>
+
+							<xs:group ref="PointGroup"/>
+
+					</xs:sequence>
+
+					<xs:attributeGroup ref="PointAttributeGroup"/>
+
+				</xs:complexType>  -->
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <!-- *************-->
+  <xs:group name="PricingInfoGroup">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Pricing related data should be added here. It extends
+
+				generic context and so have a mandatory "Type" attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Number" type="xs:nonNegativeInteger" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Numeric ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <!-- *************-->
+  <xs:group name="TicketingInfoGroup">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Pricing related data should be added here. It extends
+
+				generic context and so have a mandatory "Type" attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Number" type="xs:nonNegativeInteger" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Numeric ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <!-- ****************************************************-->
+  <xs:group name="ValidityContextGroup">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">This is the context for all Validity data (locations,
+
+				dates...).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Location" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attributeGroup ref="TypedLocationGroup" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DateTime" type="TypedDateTimeType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:group>
+  <!-- *************************************************** -->
+  <xs:complexType name="DateTimeAndLocationType">
+    <xs:all>
+      <xs:element name="Location">
+        <xs:annotation>
+          <xs:documentation>Location information</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Location has a code and a
+
+							CodeContext</xs:documentation>
+          </xs:annotation>
+          <xs:attributeGroup ref="CodeAndContext_group" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="DateTime" type="xs:dateTime" use="required">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Date and time for this point</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:attributeGroup name="CodeAndContext_group">
+    <xs:attribute name="Code" type="iata:AlphaNumericStringLength1to4" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Provider code in given code context (f.e. Airline
+
+					IATA code)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="CodeContext" type="iata:AlphaNumericStringLength1to4" use="optional" default="IATA">
+      <xs:annotation>
+        <xs:documentation>Code context for given's code (f.e. IATA, OTA,
+
+					etc...)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:complexType name="TypedDateTimeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:dateTime">
+        <xs:attribute name="Type" use="required">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="NotBefore" />
+              <xs:enumeration value="NotAfter" />
+              <xs:enumeration value="Before" />
+              <xs:enumeration value="After" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:attributeGroup name="AmountCurrencyAndDecimalPlaceGroup">
+    <xs:attributeGroup ref="iata:CurrencyCodeGroup" />
+    <xs:attribute name="Amount" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>Defines the amount without decimal separator (i.e. Amount=8500 and
+
+					DecimalPlace=2 represent 85.00)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+</xs:schema>
+
