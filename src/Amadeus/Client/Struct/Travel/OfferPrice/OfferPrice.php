@@ -25,13 +25,11 @@ class OfferPrice extends BaseWsMessage
         );
         $passengers = [
             new Pax('T1', PAX::PTC_ADT),
-            new Pax('T2', PAX::PTC_ADT),
-            new Pax('T3', PAX::PTC_CHD),
-            new Pax('T1.1', PAX::PTC_INF),
         ];
         $this->Request = new Request(
             $passengers,
             $options->offerItemID,
+            $options->offerItemRefID,
             $options->ownerCode,
             $options->shoppingResponseRefID
         );

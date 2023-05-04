@@ -8,23 +8,24 @@ class Request
     public PricedOffer $PricedOffer;
 
     /**
-     * @param Pax[] $pax
+     * @param Pax[] $Pax
      */
     public function __construct(
-        array $pax,
-        string $offerID,
+        array $Pax,
+        string $OfferID,
+        string $OfferItemRefID,
         string $OwnerCode,
         string $ShoppingResponseRefID
     ) {
-        $this->DataLists = new DataLists($pax);
+        $this->DataLists = new DataLists($Pax);
         $this->PricedOffer = new PricedOffer(
             new SelectedOffer(
-                $offerID,
+                $OfferID,
                 $OwnerCode,
                 $ShoppingResponseRefID,
                 [
                     new SelectedOfferItem(
-                        '',
+                        $OfferItemRefID,
                         'T1',
                         [new SelectedAlaCarteOfferItem('1')]
                     )
